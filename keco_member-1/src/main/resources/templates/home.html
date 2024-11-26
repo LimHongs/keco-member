@@ -20,7 +20,7 @@
 	<!-- 회원정보 수정 및 로그아웃 버튼 -->
 	<div th:if="${userId != null}" style="text-align: center;">
 		<button type="button">
-			<a th:href="@{/members/update(mem_id=${userId})}">회원정보 수정</a>
+			<a th:href="@{/members/update(mem_id=${userId})}" style="text-decoration:none; color: white;">회원정보 수정</a>
 		</button>
 		<button onclick="location.href='/members/list'">리스트 보기</button>
 		<button onclick="location.href='/logout'">로그아웃</button>

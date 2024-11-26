@@ -41,6 +41,9 @@ label {
 	align-items: baseline;
 }
 
+.login{
+	text-align: center; place-self: center; max-width: 500px; background-color: white;
+}
 
 button {
 	width: 140px;
