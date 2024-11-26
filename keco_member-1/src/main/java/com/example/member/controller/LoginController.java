@@ -63,10 +63,6 @@ public class LoginController {
 	        response.put("success", false);
 	        response.put("message", e.getMessage());
 	    }
-
 	    return response;
 	}
-
-
-
 }
