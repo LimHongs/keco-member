@@ -8,26 +8,28 @@
 </head>
 
 <body>
-    <h1>
-        <span th:if="${username != null}">
-            환영합니다, <span th:text="${username}"></span>님!
-        </span>
-        <span th:if="${username == null}">
-            환영합니다, 방문자님!
-        </span>
-    </h1>
+	<h1>
+		<span th:if="${username != null}">
+			환영합니다, <span th:text="${username}"></span>님!
+		</span>
+		<span th:if="${username == null}">
+			환영합니다, 방문자님!
+		</span>
+	</h1>
 
-    <!-- 회원정보 수정 및 로그아웃 버튼 -->
-    <div th:if="${userId != null}">
-        <a th:href="@{/members/update(mem_id=${userId})}">회원정보 수정</a>
-        <button onclick="location.href='/logout'">로그아웃</button>
-    </div>
+	<!-- 회원정보 수정 및 로그아웃 버튼 -->
+	<div th:if="${userId != null}" style="text-align: center;">
+		<button type="button">
+			<a th:href="@{/members/update(mem_id=${userId})}" style="text-decoration:none; color: white;">회원정보 수정</a>
+		</button>
+		<button onclick="location.href='/members/list'">리스트 보기</button>
+		<button onclick="location.href='/logout'">로그아웃</button>
+	</div>
 
-    <!-- 로그인 버튼 -->
-    <div th:if="${userId == null}">
-        <button onclick="location.href='/members/login'">로그인</button>
-    </div>
-
+	<!-- 로그인 버튼 -->
+	<div th:if="${userId == null}">
+		<button onclick="location.href='/members/login'">로그인</button>
+	</div>
 
 	<script>
 		$(document).ready(function () {

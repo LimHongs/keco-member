@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>회원 목록</title>
+	<title>회원 목록</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="/css/Style.css">
 </head>
+
 <body>
-    <h1>회원 목록</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>아이디</th>
-                <th>이름</th>
-                <th>연락처</th>
-                <th>우편번호</th>
-                <th>주소1</th>
-                <th>주소2</th>
-                <th>가입 날짜</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- members 반복 출력 -->
-            <tr th:each="member : ${members}">
-                <td th:text="${member.mem_id}"></td>
-                <td th:text="${member.mem_name}"></td>
-                <td th:text="${member.mem_phone}"></td>
-                <td th:text="${member.mem_zipcode}"></td>
-                <td th:text="${member.mem_addr1}"></td>
-                <td th:text="${member.mem_addr2}"></td>
-                <td th:text="${member.regdate}"></td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="/members/new">회원 등록</a>
+	<h1>회원 목록</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>게시글 내용</th>
+				<th>댓글 수</th>
+				<th>등록일</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- members 반복 출력 -->
+			<tr  style="text-align: center; " th:each="member : ${members}">
+				<td th:text="${member.mem_id}"></td>
+				<td th:text="${member.mem_name}"></td>
+				<td th:text="${member.regdate}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<button onclick="location.href='/board/del'">삭제</button>
+	<button onclick="location.href='/board/upd'">수정</button>
 </body>
+
 </html>
