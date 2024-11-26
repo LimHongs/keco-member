@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="/css/Style.css">
+
+</head>
+
+<body>
+	<h1>로그인</h1>
+		
+	<form id="loginForm">
+		<div>
+			<label for="mem_id" style="width: 66px;">아이디:</label>
+			<input type="text" id="mem_id" name="mem_id">
+		</div>
+		<div>
+			<label for="mem_name" style="width: 66px;">이름:</label>
+			<input type="text" id="mem_name" name="mem_name">
+		</div>
+		<button type="button" id="submitLogin">로그인</button>
+		<button onclick="location.href='/members/new'">회원 가입</button>
+	</form>
+
+	<script>
+	$('#submitLogin').click(function (event) {
+    event.preventDefault();
+
+    const memId = $('#mem_id').val();
+    const memName = $('#mem_name').val();
+
+    if (!memId || !memName) {
+        alert('아이디와 이름을 모두 입력해주세요.');
+        return;
+    }
+
+    // AJAX 요청
+    $.ajax({
+        url: '/members/login',
+        type: 'POST',
+        data: { mem_id: memId, mem_name: memName },
+        success: function (response) {
+            if (response.success) {
+                alert('로그인 성공했습니다.');
+                window.location.href = response.redirect; // 홈 페이지로 이동
+            } else {
+                // 실패 메시지와 실패 횟수를 포함한 alert 표시
+                const failedAttempts = response.failedAttempts || 0; // 실패 횟수 (기본값 0)
+                alert(`로그인 실패. 현재 실패 횟수: ${failedAttempts}`);
+            }
+        },
+        error: function () {
+            alert('로그인 요청 중 문제가 발생했습니다.');
+        }
+    });
+});
+
+
+	</script>
+</body>
+
+</html>

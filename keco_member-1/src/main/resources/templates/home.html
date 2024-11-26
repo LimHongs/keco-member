@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Main Page</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="/css/Style.css">
+</head>
+
+<body>
+    <h1>
+        <span th:if="${username != null}">
+            환영합니다, <span th:text="${username}"></span>님!
+        </span>
+        <span th:if="${username == null}">
+            환영합니다, 방문자님!
+        </span>
+    </h1>
+
+    <!-- 회원정보 수정 및 로그아웃 버튼 -->
+    <div th:if="${userId != null}">
+        <a th:href="@{/members/update(mem_id=${userId})}">회원정보 수정</a>
+        <button onclick="location.href='/logout'">로그아웃</button>
+    </div>
+
+    <!-- 로그인 버튼 -->
+    <div th:if="${userId == null}">
+        <button onclick="location.href='/members/login'">로그인</button>
+    </div>
+
+
+	<script>
+		$(document).ready(function () {
+			$('#logoutButton').click(function () {
+				// 로그아웃 요청
+				$.ajax({
+					url: '/logout',
+					type: 'GET',
+					success: function () {
+						alert('로그아웃되었습니다.');
+						window.location.href = '/'; // 로그인 페이지로 이동
+					},
+					error: function () {
+						alert('로그아웃 처리 중 문제가 발생했습니다.');
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

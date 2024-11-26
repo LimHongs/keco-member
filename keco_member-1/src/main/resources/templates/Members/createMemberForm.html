@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="/css/Style.css">
+</head>
+
+<body>
+	<h1>회원가입</h1>
+	<form action="/members/new" method="post">
+		<div class="id-container">
+			<label for="mem_Id" style="width:66px;">아이디</label>
+			<input type="text" id="mem_Id" name="mem_id" required>
+			<button type="button" id="sameCheck" class="btn-duplicate">중복확인</button>
+		</div>
+
+		<label for="mem_Name" style="width: 66px;">이름</label>
+		<input type="text" id="mem_Name" name="mem_name" required><br>
+		<label for="mem_Phone" style="width:66px;">연락처</label>
+		<input type="text" id="mem_Phone" name="mem_phone" required><br>
+
+		<div class="addr-container">
+			<label for="mem_zpcode" style="width:66px;">주소</label>
+			<input type="text" id="mem_zpcode" name="mem_zipcode">
+			<button type="button" class="btn-search" onclick="zipcode()">우편번호 검색</button><br>
+		</div>
+		<label for="mem_Addr1" style="width: 65px;"></label>
+		<input type="text" id="mem_Addr1" name="mem_addr1"><br>
+		<label for="mem_Addr2" style="width: 65px;"></label>
+		<input type="text" id="mem_Addr2" name="mem_addr2"><br>
+
+		<div class="button-container">
+			<button type="submit" class="btn-register" onclick="registerMember()">회원가입</button>
+			<button type="reset" class="btn-reset">취소</button>
+			
+		</div>
+	</form>
+
+
+	<script>
+		$('#sameCheck').click(function () {
+			var memid = $('#mem_Id').val(); 
+
+			if (!memid) { 
+				alert('아이디를 입력해주세요.');
+				return;
+			}
+
+			$.ajax({
+				url: 'http://localhost:8080/members/check-id',
+				type: 'GET',
+				data: {mem_id: memid},
+				success: function (isDuplicate) {
+					if (isDuplicate) {
+						alert('이미 사용 중인 아이디입니다.');
+					} else {
+						alert('사용 가능한 아이디입니다.');
+					}
+				},
+				error: function () {
+					alert('아이디 중복 확인에 실패했습니다. 다시 시도해주세요.');
+				}
+			});
+		});
+	</script>
+
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+	<script>
+		function zipcode() {
+			new daum.Postcode({
+				oncomplete: function (data) {
+					var roadAddr = data.roadAddress;
+					var extraRoadAddr = '';
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+					}
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('mem_zpcode').value = data.zonecode;
+					document.getElementById("mem_Addr1").value = roadAddr;
+
+					var guideTextBox = document.getElementById("guide");
+					if (data.autoRoadAddress) {
+						var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+						guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+						guideTextBox.style.display = 'block';
+
+					} else if (data.autoJibunAddress) {
+						var expJibunAddr = data.autoJibunAddress;
+						guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+						guideTextBox.style.display = 'block';
+					} else {
+						guideTextBox.innerHTML = '';
+						guideTextBox.style.display = 'none';
+					}
+				}
+			}).open();
+		}
+	</script>
+
+
+</body>
+
+</html>

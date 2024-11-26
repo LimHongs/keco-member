@@ -1,0 +1,167 @@
+@charset "utf-8";
+
+body {
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+	margin: 0;
+	padding: 20px;
+	background-color: #f4f4f4;
+}
+
+h1 {
+	color: #333;
+	text-align: center;
+}
+
+form {
+	background: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
+}
+
+.id-container {
+	display: flex;
+	align-items: center;
+	gap: 36px;
+}
+
+.addr-container {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	align-items: baseline;
+}
+
+
+button {
+	width: 140px;
+	background: #007bff;
+	color: #fff;
+	border: none;
+	height: 40px;
+	padding: 0 15px;
+	border-radius: 5px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-duplicate {
+	margin-top: -15px;
+}
+
+button:hover {
+	background: #0056b3;
+}
+
+input[type="text"] {
+	width: 300px;
+	height: 40px;
+	padding: 0 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.id-container {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	/* 입력 필드와 버튼 간 간격 */
+}
+
+#mem_Id {
+	width: 300px;
+	padding: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#mem_Name {
+	width: 429px;
+	padding: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#mem_Phone {
+	width: 429px;
+	padding: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#mem_zpcode {
+	width: 300px;
+	padding: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#mem_Addr1 {
+	width: 430px;
+	padding: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#mem_Addr2 {
+	width: 430px;
+	padding: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+label {
+	display: inline-flex;
+	align-items: center;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+label[for="memId"] {
+	width: 53px;
+}
+
+
+
+.id-container {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.button-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.btn-register,
+.btn-reset {
+	background: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
